@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 
 
-cur_dir="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
-self_path="$(cd -P -- "$(dirname -- "$0")" && pwd -P)/$(basename -- "$0")"
-
 _red() {
     printf '\033[1;31m%b\033[0m' "$1"
 }
@@ -90,11 +87,6 @@ sysctl_config() {
     sysctl -p >/dev/null 2>&1
 }
 
-self_destruct() {
-    # Remove this script and its log after execution.
-    rm -f "${self_path}" "${cur_dir}/install_bbr.log" 2>/dev/null
-}
-
 install_bbr() {
     if check_bbr_status; then
         echo
@@ -117,8 +109,6 @@ install_bbr() {
 }
 
 [[ $EUID -ne 0 ]] && _error "This script must be run as root"
-# Ensure the script removes itself no matter how it exits.
-trap self_destruct EXIT
 
 opsy=$( [ -f /etc/os-release ] && . /etc/os-release && echo "${PRETTY_NAME}" )
 arch=$( uname -m )
