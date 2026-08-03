@@ -1,13 +1,16 @@
 // ==UserScript==
 // @author         Anonymous
-// @id             iitc-plugin-force-zoomlevel
-// @name           IITC plugin: Force Zoom Level
+// @name           IITC plugin: Zoom override
 // @category       Tweaks
-// @version        0.1.1
-// @namespace      https://iitc.me
-// @description    Force IITC to load all portals, all links, or default regardless of zoom level.
+// @version        0.1.5
+// @description    Override IITC portal and link loading behavior by zoom level.
+// @id             zoomoverride
+// @namespace      https://github.com/chaeoi/cdno
+// @updateURL      https://cdno.canghai.org/js/zoomoverride.user.js
+// @downloadURL    https://cdno.canghai.org/js/zoomoverride.user.js
 // @match          https://intel.ingress.com/*
 // @match          https://intel-x.ingress.com/*
+// @icon           https://cdno.canghai.org/images/zoomoverride.svg
 // @grant          none
 // ==/UserScript==
 
@@ -20,7 +23,7 @@ if(typeof window.plugin !== 'function') window.plugin = function() {};
 //(leaving them in place might break the 'About IITC' page or break update checks)
 plugin_info.buildName = 'local';
 plugin_info.dateTimeVersion = '20170312.40451';
-plugin_info.pluginId = 'force-zoomlevel';
+plugin_info.pluginId = 'zoomoverride';
 //END PLUGIN AUTHORS NOTE
 
 
@@ -51,7 +54,7 @@ window.plugin.forceZoomLevel.showDialog = function() {
     var label = div.appendChild(document.createElement('label'));
     var input = label.appendChild(document.createElement('input'));
     input.type = 'radio';
-    input.name = 'plugin-force-zoomlevel';
+    input.name = 'plugin-zoomoverride';
     input.value = option;
     if(option === window.plugin.forceZoomLevel.mode) {
       input.checked = true;
@@ -67,7 +70,7 @@ window.plugin.forceZoomLevel.showDialog = function() {
   }
 
   dialog({
-    id: 'plugin-force-zoomlevel',
+    id: 'plugin-zoomoverride',
     html: div,
     title: 'Force Zoom Level',
   });
@@ -75,7 +78,7 @@ window.plugin.forceZoomLevel.showDialog = function() {
 
 window.plugin.forceZoomLevel.setMode = function (mode) {
   window.plugin.forceZoomLevel.mode = mode;
-  localStorage['plugin-forcezoomlevel-mode'] = mode;
+  localStorage['plugin-zoomoverride-mode'] = mode;
   switch(mode) {
     case 'Default':
       window.getDataZoomForMapZoom = window.getDataZoomForMapZoomDefault;
@@ -98,7 +101,7 @@ window.plugin.forceZoomLevel.setup  = function() {
   window.getDataZoomForMapZoomAllPortals = function() { return 17 };
   
   try {
-    var mode = localStorage['plugin-forcezoomlevel-mode'];
+    var mode = localStorage['plugin-zoomoverride-mode'];
     if(typeof(mode) === 'undefined') {
       mode = 'Default';
     }
@@ -126,5 +129,3 @@ var info = {};
 if (typeof GM_info !== 'undefined' && GM_info && GM_info.script) info.script = { version: GM_info.script.version, name: GM_info.script.name, description: GM_info.script.description };
 script.appendChild(document.createTextNode('('+ wrapper +')('+JSON.stringify(info)+');'));
 (document.body || document.head || document.documentElement).appendChild(script);
-
-
