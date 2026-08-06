@@ -4,23 +4,25 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="CDNO CDN 文件目录">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23147d76'/%3E%3Cpath d='M42 22a15 15 0 1 0 0 20' fill='none' stroke='white' stroke-width='7' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://registry.npmmirror.com">
+  <link rel="stylesheet" href="https://registry.npmmirror.com/lxgw-wenkai-screen-web/1.522.0/files/style.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%232e2e33'/%3E%3Cpath d='M42 22a15 15 0 1 0 0 20' fill='none' stroke='white' stroke-width='7' stroke-linecap='round'/%3E%3C/svg%3E">
   <title>CDNO 文件目录</title>
   <style>
     :root {
       color-scheme: light;
-      --ink: #18232d;
-      --muted: #687680;
-      --line: #dbe2e5;
-      --line-strong: #c7d1d5;
-      --paper: #f5f7f6;
+      --ink: #2e2e33;
+      --muted: #73747b;
+      --line: #dedee2;
+      --line-strong: #c9c9ce;
+      --paper: #f7f7f8;
       --surface: #ffffff;
-      --surface-soft: #eef3f1;
-      --accent: #147d76;
-      --accent-dark: #0d625d;
-      --accent-soft: #dceeea;
-      --orange: #c66a2e;
-      --shadow: 0 12px 32px rgba(24, 35, 45, .07);
+      --surface-soft: #f0f0f2;
+      --accent: #2e2e33;
+      --accent-dark: #18181b;
+      --accent-soft: #ececee;
+      --warning: #686970;
+      --shadow: 0 12px 32px rgba(46, 46, 51, .08);
     }
 
     * { box-sizing: border-box; }
@@ -32,7 +34,7 @@
       min-width: 320px;
       color: var(--ink);
       background: var(--paper);
-      font: 15px/1.55 ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font: 15px/1.55 "LXGW WenKai Screen", sans-serif;
     }
 
     button, input { font: inherit; }
@@ -88,19 +90,6 @@
       font-size: 13px;
     }
 
-    .source-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      color: var(--muted);
-      font-size: 13px;
-      text-decoration: none;
-    }
-
-    .source-link:hover { color: var(--accent-dark); }
-
-    .source-link svg { width: 15px; height: 15px; }
-
     .intro {
       display: grid;
       grid-template-columns: 1fr auto;
@@ -123,13 +112,6 @@
       font-size: 42px;
       line-height: 1.1;
       letter-spacing: 0;
-    }
-
-    .lead {
-      max-width: 620px;
-      margin: 13px 0 0;
-      color: var(--muted);
-      font-size: 15px;
     }
 
     .stats {
@@ -204,7 +186,7 @@
     #search:focus {
       background: #fff;
       border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(20, 125, 118, .12);
+      box-shadow: 0 0 0 3px rgba(46, 46, 51, .12);
     }
 
     .clear-search {
@@ -251,7 +233,7 @@
     .filter.active {
       color: var(--accent-dark);
       background: var(--accent-soft);
-      border-color: #b5d9d2;
+      border-color: var(--line-strong);
       font-weight: 700;
     }
 
@@ -283,7 +265,7 @@
 
     .file-row:last-child { border-bottom: 0; }
 
-    .file-row:hover { background: #fbfcfc; }
+    .file-row:hover { background: #fafafa; }
 
     .file-main {
       display: flex;
@@ -321,7 +303,7 @@
       overflow: hidden;
       margin-top: 2px;
       color: var(--muted);
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-family: "LXGW WenKai Mono Screen", ui-monospace, monospace;
       font-size: 12px;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -396,7 +378,7 @@
       border-radius: 50%;
     }
 
-    .status-dot.warning { background: var(--orange); }
+    .status-dot.warning { background: var(--warning); }
 
     .toast {
       position: fixed;
@@ -406,7 +388,7 @@
       max-width: min(360px, calc(100% - 44px));
       padding: 11px 14px;
       color: #fff;
-      background: #23333a;
+      background: var(--accent-dark);
       border-radius: 5px;
       box-shadow: var(--shadow);
       font-size: 13px;
@@ -421,7 +403,6 @@
     @media (max-width: 800px) {
       .page-shell { width: min(100% - 28px, 680px); padding-top: 22px; }
       .topbar { margin-bottom: 34px; }
-      .source-link span { display: none; }
       .intro { display: block; }
       .stats { margin-top: 24px; }
       .toolbar { display: block; }
@@ -442,7 +423,6 @@
     @media (max-width: 440px) {
       .brand-context { display: none; }
       h1 { font-size: 30px; }
-      .lead { font-size: 14px; }
       .stats { gap: 18px; }
       .stat-value { font-size: 23px; }
     }
@@ -455,17 +435,12 @@
         <span class="brand-mark">C</span>
         <span class="brand-name">CDNO<span class="brand-context">CDN 文件目录</span></span>
       </a>
-      <a class="source-link" href="https://github.com/chaeoi/cdno" target="_blank" rel="noreferrer">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"/><path d="m10 14 11-11"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
-        <span>查看 GitHub 仓库</span>
-      </a>
     </header>
 
     <section class="intro" aria-labelledby="page-title">
       <div>
         <p class="eyebrow">Public assets</p>
         <h1 id="page-title">CDN 文件目录</h1>
-        <p class="lead">面向 cdno.canghai.org 的公开资源索引，涵盖脚本、配置和图标文件。</p>
       </div>
       <div class="stats" aria-label="目录统计">
         <div class="stat"><span id="file-count" class="stat-value">—</span><span class="stat-label">个文件</span></div>
@@ -477,7 +452,7 @@
       <div class="toolbar">
         <div class="search-wrap">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
-          <input id="search" type="search" placeholder="搜索文件名或路径" aria-label="搜索文件" autocomplete="off" spellcheck="false">
+          <input id="search" type="search" placeholder="搜索文件名" aria-label="搜索文件名" autocomplete="off" spellcheck="false">
           <button id="clear-search" class="clear-search" type="button" aria-label="清除搜索" title="清除搜索" hidden>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
           </button>
@@ -503,7 +478,7 @@
       'use strict';
 
       var CDN_BASE = 'https://cdno.canghai.org';
-      var REPO_TREE_URL = 'https://api.github.com/repos/chaeoi/cdno/git/trees/main?recursive=1';
+      var TREE_URL = 'https://api.github.com/repos/chaeoi/cdno/git/trees/main?recursive=1';
       var CACHE_KEY = 'cdno-file-tree-v1';
 
       var state = { files: [], filter: 'all', query: '' };
@@ -593,7 +568,7 @@
         var query = state.query.trim().toLowerCase();
         var visible = state.files.filter(function (file) {
           var matchesFilter = state.filter === 'all' || file.type === state.filter;
-          var matchesQuery = !query || (file.path + ' ' + file.type).toLowerCase().indexOf(query) !== -1;
+          var matchesQuery = !query || fileName(file.path).toLowerCase().indexOf(query) !== -1;
           return matchesFilter && matchesQuery;
         });
         list.innerHTML = visible.map(function (file) {
@@ -615,15 +590,15 @@
 
       function setFiles(files, fromApi) {
         state.files = files.filter(function (file) {
-          return file.path && file.path.split('/').every(function (part) { return part.charAt(0) !== '.'; });
+          return file.path && file.path !== 'index.html' && file.path.split('/').every(function (part) { return part.charAt(0) !== '.'; });
         }).map(function (file) {
           return { path: file.path, size: Number(file.size) || 0, type: classify(file.path) };
-        }).sort(function (a, b) { return a.path.localeCompare(b.path); });
+        }).sort(function (a, b) { return a.path.localeCompare(b.path, 'en'); });
         document.getElementById('file-count').textContent = state.files.length;
         document.getElementById('type-count').textContent = new Set(state.files.map(function (file) { return file.type; })).size;
         renderFilters();
         renderList();
-        statusText.textContent = fromApi ? '已同步 GitHub 目录' : '显示缓存目录';
+        statusText.textContent = fromApi ? '目录已更新' : '显示缓存目录';
         statusDot.classList.toggle('warning', !fromApi);
         updatedAt.textContent = '更新于 ' + new Intl.DateTimeFormat('zh-CN', { dateStyle: 'medium' }).format(new Date());
       }
@@ -654,7 +629,7 @@
         empty.querySelector('strong').textContent = '暂时无法读取文件目录';
         empty.querySelector('span').textContent = '请稍后刷新页面重试。';
         empty.classList.add('visible');
-        statusText.textContent = 'GitHub 目录同步失败';
+        statusText.textContent = '目录同步失败';
         statusDot.classList.add('warning');
         updatedAt.textContent = '';
       }
@@ -667,8 +642,8 @@
         }
         var controller = typeof AbortController === 'function' ? new AbortController() : null;
         var timeout = controller ? setTimeout(function () { controller.abort(); }, 7000) : null;
-        var options = controller ? { headers: { Accept: 'application/vnd.github+json' }, signal: controller.signal } : { headers: { Accept: 'application/vnd.github+json' } };
-        fetch(REPO_TREE_URL, options).then(function (response) {
+        var options = controller ? { signal: controller.signal } : {};
+        fetch(TREE_URL, options).then(function (response) {
           if (!response.ok) throw new Error('目录接口返回 ' + response.status);
           return response.json();
         }).then(function (payload) {
