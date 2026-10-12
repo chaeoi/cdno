@@ -501,16 +501,37 @@
 
       function classify(path) {
         var extension = path.split('.').pop().toLowerCase();
-        var names = { js: 'JavaScript', user: 'JavaScript', conf: '配置', sh: 'Shell', svg: 'SVG', html: 'HTML', css: 'CSS', json: 'JSON', md: '文档' };
-        return names[extension] || (path.indexOf('/') === -1 ? '文件' : '资源');
+        var names = {
+          js: 'JavaScript',
+          user: 'JavaScript',
+          ts: 'JavaScript',
+          html: 'HTML',
+          css: 'CSS',
+          json: 'JSON',
+          svg: 'SVG',
+          png: '图片',
+          jpg: '图片',
+          jpeg: '图片',
+          webp: '图片',
+          gif: '图片',
+          ico: '图片'
+        };
+        return names[extension] || '其他';
       }
 
+      var ICONS = {
+        'JavaScript': '<path d="M8 9 5 12l3 3M16 9l3 3-3 3M14 5l-4 14"/>',
+        'HTML':       '<path d="m8 9-3 3 3 3M16 9l3 3-3 3M13 6l-2 12"/>',
+        'CSS':        '<path d="M4 3h16l-2 15-6 3-6-3L4 3z"/><path d="m8 8 8 2-1 4-3 1.5L9 14"/>',
+        'JSON':       '<path d="M7 4a2 2 0 0 0-2 2v2a2 2 0 0 1-2 2 2 2 0 0 1 2 2v2a2 2 0 0 0 2 2M17 4a2 2 0 0 1 2 2v2a2 2 0 0 0 2 2 2 2 0 0 0-2 2v2a2 2 0 0 1-2 2"/>',
+        'SVG':        '<path d="M5 4h14v16H5z"/><path d="m8 15 2.2-3 2 2 1.5-2 2.3 3"/><circle cx="9" cy="8.5" r="1"/>',
+        '图片':       '<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/>',
+        '其他':       '<path d="M6 3h9l3 3v15H6z"/><path d="M14 3v4h4M9 12h6M9 16h6"/>'
+      };
+
       function iconFor(type) {
-        if (type === 'JavaScript') return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 9 5 12l3 3M16 9l3 3-3 3M14 5l-4 14"/></svg>';
-        if (type === '配置') return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/><circle cx="8" cy="7" r="1.5" fill="currentColor"/><circle cx="15" cy="12" r="1.5" fill="currentColor"/><circle cx="11" cy="17" r="1.5" fill="currentColor"/></svg>';
-        if (type === 'SVG') return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h14v16H5z"/><path d="m8 15 2.2-3 2 2 1.5-2 2.3 3"/><circle cx="9" cy="8.5" r="1"/></svg>';
-        if (type === 'Shell') return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m7 10 2 2-2 2M12 14h4"/></svg>';
-        return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h9l3 3v15H6z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></svg>';
+        var path = ICONS[type] || ICONS['其他'];
+        return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + path + '</svg>';
       }
 
       function formatSize(bytes) {
